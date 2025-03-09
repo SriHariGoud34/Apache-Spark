@@ -1,0 +1,100 @@
+That's a great choice! Apache Spark is a powerful framework for **big data processing** and is widely used in **data engineering and analytics**.  
+
+### **🔹 How to Learn Apache Spark from Scratch?**  
+Here’s a structured learning plan:  
+
+---
+
+## **📌 Step 1: Understand the Basics**  
+✅ What is Apache Spark?  
+- Open-source **big data processing framework**  
+- Works with **batch & real-time** data  
+- Supports **SQL, Machine Learning, and Streaming**  
+
+✅ Key Spark Components:  
+1️⃣ **RDD (Resilient Distributed Dataset)** – Core data structure  
+2️⃣ **DataFrame** – Tabular data format (like SQL tables)  
+3️⃣ **Spark SQL** – Query data using SQL  
+4️⃣ **Spark Streaming** – Real-time data processing  
+5️⃣ **MLlib** – Machine learning in Spark  
+
+🔗 **Learn**: Read [Apache Spark Official Docs](https://spark.apache.org/docs/latest/)  
+
+---
+
+## **📌 Step 2: Set Up Apache Spark**  
+### **🔹 Install Spark Locally**  
+1️⃣ Download Spark:
+```bash
+wget https://dlcdn.apache.org/spark/spark-3.3.1/spark-3.3.1-bin-hadoop3.tgz
+tar -xvzf spark-3.3.1-bin-hadoop3.tgz
+```
+2️⃣ Set Environment Variables:
+```bash
+export SPARK_HOME=~/spark-3.3.1-bin-hadoop3
+export PATH=$SPARK_HOME/bin:$PATH
+```
+3️⃣ Start Spark Shell:
+```bash
+$SPARK_HOME/bin/spark-shell
+```
+4️⃣ Install PySpark (For Python Users):
+```bash
+pip install pyspark
+```
+---
+
+## **📌 Step 3: Learn Spark Core (RDD & DataFrames)**  
+✅ **RDD (Low-Level API)**
+```python
+from pyspark import SparkContext
+sc = SparkContext("local", "RDD Example")
+
+data = [1, 2, 3, 4, 5]
+rdd = sc.parallelize(data)
+
+print(rdd.map(lambda x: x * 2).collect())
+```
+✅ **DataFrames (High-Level API)**
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("DataFrame Example").getOrCreate()
+
+data = [(1, "Alice", 29), (2, "Bob", 35)]
+df = spark.createDataFrame(data, ["ID", "Name", "Age"])
+
+df.show()
+```
+---
+
+## **📌 Step 4: Learn Spark SQL**  
+✅ Query Data Like SQL
+```python
+df.createOrReplaceTempView("people")
+spark.sql("SELECT * FROM people WHERE Age > 30").show()
+```
+---
+
+## **📌 Step 5: Learn Spark Streaming**  
+✅ Process Real-Time Data
+```python
+from pyspark.sql.functions import explode
+from pyspark.sql.types import StringType
+
+df = spark.readStream.format("socket").option("host", "localhost").option("port", 9999).load()
+
+query = df.writeStream.outputMode("append").format("console").start()
+query.awaitTermination()
+```
+---
+
+## **📌 Step 6: Work on Real Projects**  
+1️⃣ **Batch Processing** – Process large datasets (ETL pipelines)  
+2️⃣ **Streaming Analytics** – Process real-time logs  
+3️⃣ **Machine Learning** – Train models on big data  
+
+---
+
+## **📌 Next Steps**  
+Would you like **hands-on projects** or **practice interview questions**? 🚀
